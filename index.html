@@ -1,210 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Form</title>
-    <style>
-        /* Mobile-friendly form container styling */
-        form {
-            width: 90%;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+<!--  ----------------------------------------------------------------------  -->
 
-        /* Styling for form labels */
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
 
-        /* Styling for form input fields */
-        input[type="text"],
-        input[type="email"],
-        select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
 
-        /* Styling for the submit button */
-        button[type="submit"] {
-            width: 100%;
-            padding: 12px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST">
 
-        /* Change button color on hover */
-        button[type="submit"]:hover {
-            background-color: #45a049;
-        }
+<input type=hidden name="orgid" value="00DWU000007yvAg">
+<input type=hidden name="retURL" value="https://neluheni.github.io/VhoMadevha/">
 
-        /* Additional styling for a more refined look */
-        input:focus,
-        select:focus {
-            border-color: #4CAF50;
-            outline: none;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-        }
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+<!--  these lines if you wish to test in debug mode.                          -->
+<!--  <input type="hidden" name="debug" value=1>                              -->
+<!--  <input type="hidden" name="debugEmail"                                  -->
+<!--  value="neluhenimr4jobs@gmail.com">                                      -->
+<!--  ----------------------------------------------------------------------  -->
 
-        /* Ensure the form elements look good on smaller screens */
-        @media (max-width: 600px) {
-            form {
-                width: 100%;
-                padding: 15px;
-            }
+payment method:<select  id="00NWU0000039vlK" name="00NWU0000039vlK" title="payment method"><option value="">--None--</option><option value="cards">cards</option>
+<option value="cash">cash</option>
+</select><br>
 
-            input[type="text"],
-            input[type="email"],
-            select {
-                padding: 10px;
-                font-size: 14px;
-            }
+Product:<select  id="00NWU0000039AWQ" name="00NWU0000039AWQ" title="Product"><option value="">--None--</option><option value="GC1040">GC1040</option>
+<option value="GC1060">GC1060</option>
+<option value="GC3020">GC3020</option>
+<option value="GC3040">GC3040</option>
+<option value="GC3060">GC3060</option>
+<option value="GC5020">GC5020</option>
+<option value="GC5040">GC5040</option>
+<option value="GC5060">GC5060</option>
+<option value="GC1020">GC1020</option>
+</select><br>
 
-            button[type="submit"] {
-                padding: 10px;
-                font-size: 14px;
-            }
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-</head>
-<body>
-    <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST" onsubmit="handleFormSubmission(event);">
+total pay:<input  id="00NWU0000039xIT" name="00NWU0000039xIT" size="20" type="text" /><br>
 
-        <!-- Hidden fields required for Web-to-Lead -->
-        <input type="hidden" name="oid" value="00DWU000007yvAg">
-        <input type="hidden" name="retURL" value="https://neluheni.github.io/VhoMadevha/">
+<label for="status">Status</label><select  id="status" name="status"><option value="">--None--</option><option value="New">New</option>
+<option value="Working">Working</option>
+<option value="Escalated">Escalated</option>
+<option value="Closed">Closed</option>
+</select><br>
 
-        <!-- Optional debugging fields -->
-        <!-- Uncomment these lines for debugging purposes -->
-        <!-- <input type="hidden" name="debug" value=1> -->
-        <!-- <input type="hidden" name="debugEmail" value="neluhenimr4jobs@gmail.com"> -->
+<input type="submit" name="submit">
 
-        <label for="first_name">First Name</label>
-        <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required />
-
-        <label for="last_name">Last Name</label>
-        <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required />
-
-        <label for="email">Email</label>
-        <input id="email" maxlength="80" name="email" size="20" type="email" required />
-
-        <label for="company">Company</label>
-        <input id="company" maxlength="40" name="company" size="20" type="text" required />
-
-        <label for="province">State/Province</label>
-        <select id="province" name="state" required>
-            <option value="">Select Province</option>
-            <option value="Eastern Cape">Eastern Cape</option>
-            <option value="Free State">Free State</option>
-            <option value="Gauteng">Gauteng</option>
-            <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-            <option value="Limpopo">Limpopo</option>
-            <option value="Mpumalanga">Mpumalanga</option>
-            <option value="Northern Cape">Northern Cape</option>
-            <option value="North West">North West</option>
-            <option value="Western Cape">Western Cape</option>
-        </select>
-
-        <label for="city">City</label>
-        <select id="city" name="city" required>
-            <option value="">Select City</option>
-        </select>
-
-        <button type="submit">Submit</button>
-
-        <div id="successMessage" style="display:none; margin-top: 20px; color: green;">
-            Form submitted successfully! Your receipt is being downloaded.
-        </div>
-
-        <iframe id="hiddenFrame" name="hiddenFrame" style="display:none;"></iframe>
-
-    </form>
-
-    <script>
-        // Function to update city dropdown based on selected province
-        document.getElementById('province').addEventListener('change', function() {
-            var province = this.value;
-            var citySelect = document.getElementById('city');
-
-            // Clear previous cities
-            citySelect.innerHTML = '<option value="">Select City</option>';
-
-            // Define city options based on the selected province
-            var cities = {
-                'Eastern Cape': ['Bhisho', 'East London', 'Port Elizabeth'],
-                'Free State': ['Bloemfontein', 'Welkom', 'Parys'],
-                'Gauteng': ['Johannesburg', 'Pretoria', 'Soweto'],
-                'KwaZulu-Natal': ['Durban', 'Pietermaritzburg', 'Richards Bay'],
-                'Limpopo': ['Polokwane', 'Thohoyandou', 'Tzaneen'],
-                'Mpumalanga': ['Nelspruit', 'Witbank', 'Secunda'],
-                'Northern Cape': ['Kimberley', 'Upington', 'Springbok'],
-                'North West': ['Mahikeng', 'Rustenburg', 'Klerksdorp'],
-                'Western Cape': ['Cape Town', 'Stellenbosch', 'George']
-            };
-
-            // Populate cities based on the selected province
-            if (province && cities[province]) {
-                cities[province].forEach(function(city) {
-                    var option = document.createElement('option');
-                    option.value = city;
-                    option.textContent = city;
-                    citySelect.appendChild(option);
-                });
-            }
-        });
-
-        // Function to handle form submission
-        async function handleFormSubmission(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Generate PDF receipt
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.text('Form Submission Receipt', 10, 10);
-            doc.text(`First Name: ${document.getElementById('first_name').value}`, 10, 20);
-            doc.text(`Last Name: ${document.getElementById('last_name').value}`, 10, 30);
-            doc.text(`Email: ${document.getElementById('email').value}`, 10, 40);
-            doc.text(`Company: ${document.getElementById('company').value}`, 10, 50);
-            doc.text(`Province: ${document.getElementById('province').value}`, 10, 60);
-            doc.text(`City: ${document.getElementById('city').value}`, 10, 70);
-
-            // Save the PDF file
-            const pdfOutput = doc.output('blob');
-            const pdfUrl = URL.createObjectURL(pdfOutput);
-
-            // Create a link element and trigger the download
-            const link = document.createElement('a');
-            link.href = pdfUrl;
-            link.download = 'receipt.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Submit the form
-            document.getElementById('leadForm').target = 'hiddenFrame';
-            document.getElementById('leadForm').submit();
-
-            // Display success message
-            document.getElementById('successMessage').style.display = 'block';
-        }
-    </script>
-</body>
-</html>
+</form>
