@@ -1,12 +1,9 @@
-
-
-<h1>GLS</h1>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Form with Dropdowns</title>
+    <title>Lead Form</title>
     <style>
         /* Mobile-friendly form container styling */
         form {
@@ -30,7 +27,6 @@
         /* Styling for form input fields */
         input[type="text"],
         input[type="email"],
-        input[type="tel"],
         select {
             width: 100%;
             padding: 12px;
@@ -75,7 +71,6 @@
 
             input[type="text"],
             input[type="email"],
-            input[type="tel"],
             select {
                 padding: 10px;
                 font-size: 14px;
@@ -87,9 +82,10 @@
             }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST">
+    <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST" onsubmit="generatePDF(event)">
 
         <!-- Hidden fields required for Web-to-Lead -->
         <input type="hidden" name="oid" value="00DWU000007yvAg">
@@ -112,56 +108,92 @@
         <label for="company">Company</label>
         <input id="company" maxlength="40" name="company" size="20" type="text" required />
 
-        <label for="state">State/Province</label>
-        <select id="state" name="state" required onchange="updateCities()">
-            <option value="">Select a Province</option>
-            <option value="Gauteng">Gauteng</option>
-            <option value="Western Cape">Western Cape</option>
-            <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+        <label for="province">State/Province</label>
+        <select id="province" name="state" required>
+            <option value="">Select Province</option>
             <option value="Eastern Cape">Eastern Cape</option>
+            <option value="Free State">Free State</option>
+            <option value="Gauteng">Gauteng</option>
+            <option value="KwaZulu-Natal">KwaZulu-Natal</option>
             <option value="Limpopo">Limpopo</option>
             <option value="Mpumalanga">Mpumalanga</option>
             <option value="Northern Cape">Northern Cape</option>
-            <option value="Free State">Free State</option>
             <option value="North West">North West</option>
+            <option value="Western Cape">Western Cape</option>
         </select>
 
         <label for="city">City</label>
         <select id="city" name="city" required>
-            <option value="">Select a City</option>
+            <option value="">Select City</option>
         </select>
 
         <button type="submit">Submit</button>
+
+        <div id="successMessage" style="display:none; margin-top: 20px; color: green;">
+            Form submitted successfully! Download your receipt <a href="#" id="receiptLink" download="receipt.pdf">here</a>.
+        </div>
+
     </form>
 
     <script>
-        function updateCities() {
-            var province = document.getElementById('state').value;
+        // Function to update city dropdown based on selected province
+        document.getElementById('province').addEventListener('change', function() {
+            var province = this.value;
             var citySelect = document.getElementById('city');
+
+            // Clear previous cities
+            citySelect.innerHTML = '<option value="">Select City</option>';
+
+            // Define city options based on the selected province
             var cities = {
-                "Gauteng": ["Johannesburg", "Pretoria", "Soweto"],
-                "Western Cape": ["Cape Town", "Stellenbosch", "George"],
-                "KwaZulu-Natal": ["Durban", "Pietermaritzburg", "Richards Bay"],
-                "Eastern Cape": ["Port Elizabeth", "East London", "Grahamstown"],
-                "Limpopo": ["Polokwane", "Thohoyandou", "Bela-Bela"],
-                "Mpumalanga": ["Nelspruit", "Witbank", "Secunda"],
-                "Northern Cape": ["Kimberley", "Upington", "Springbok"],
-                "Free State": ["Bloemfontein", "Welkom", "Parys"],
-                "North West": ["Mahikeng", "Rustenburg", "Potchefstroom"]
+                'Eastern Cape': ['Bhisho', 'East London', 'Port Elizabeth'],
+                'Free State': ['Bloemfontein', 'Welkom', 'Parys'],
+                'Gauteng': ['Johannesburg', 'Pretoria', 'Soweto'],
+                'KwaZulu-Natal': ['Durban', 'Pietermaritzburg', 'Richards Bay'],
+                'Limpopo': ['Polokwane', 'Thohoyandou', 'Tzaneen'],
+                'Mpumalanga': ['Nelspruit', 'Witbank', 'Secunda'],
+                'Northern Cape': ['Kimberley', 'Upington', 'Springbok'],
+                'North West': ['Mahikeng', 'Rustenburg', 'Klerksdorp'],
+                'Western Cape': ['Cape Town', 'Stellenbosch', 'George']
             };
 
-            // Clear previous options
-            citySelect.innerHTML = '<option value="">Select a City</option>';
-
-            // Populate new options based on the selected province
+            // Populate cities based on the selected province
             if (province && cities[province]) {
                 cities[province].forEach(function(city) {
                     var option = document.createElement('option');
                     option.value = city;
-                    option.text = city;
-                    citySelect.add(option);
+                    option.textContent = city;
+                    citySelect.appendChild(option);
                 });
             }
+        });
+
+        // Function to generate PDF receipt on form submission
+        async function generatePDF(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            // Create PDF document
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text('Form Submission Receipt', 10, 10);
+            doc.text(`First Name: ${document.getElementById('first_name').value}`, 10, 20);
+            doc.text(`Last Name: ${document.getElementById('last_name').value}`, 10, 30);
+            doc.text(`Email: ${document.getElementById('email').value}`, 10, 40);
+            doc.text(`Company: ${document.getElementById('company').value}`, 10, 50);
+            doc.text(`Province: ${document.getElementById('province').value}`, 10, 60);
+            doc.text(`City: ${document.getElementById('city').value}`, 10, 70);
+
+            // Save the PDF file
+            const pdfOutput = doc.output('blob');
+            const pdfUrl = URL.createObjectURL(pdfOutput);
+
+            // Display success message and link to download the receipt
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('receiptLink').href = pdfUrl;
+
+            // Optionally, submit the form if needed
+            // document.getElementById('leadForm').submit();
         }
     </script>
 </body>
