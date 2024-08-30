@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lead Form</title>
@@ -86,7 +85,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST" onsubmit="generatePDF(event)">
+    <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST" onsubmit="handleFormSubmission(event);">
 
         <!-- Hidden fields required for Web-to-Lead -->
         <input type="hidden" name="oid" value="00DWU000007yvAg">
@@ -131,8 +130,10 @@
         <button type="submit">Submit</button>
 
         <div id="successMessage" style="display:none; margin-top: 20px; color: green;">
-            Form submitted successfully! Download your receipt <a href="#" id="receiptLink" download="receipt.pdf">here</a>.
+            Form submitted successfully! Your receipt is being downloaded.
         </div>
+
+        <iframe id="hiddenFrame" name="hiddenFrame" style="display:none;"></iframe>
 
     </form>
 
@@ -169,11 +170,11 @@
             }
         });
 
-        // Function to generate PDF receipt on form submission
-        async function generatePDF(event) {
+        // Function to handle form submission
+        async function handleFormSubmission(event) {
             event.preventDefault(); // Prevent the default form submission
-            
-            // Create PDF document
+
+            // Generate PDF receipt
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
@@ -189,12 +190,20 @@
             const pdfOutput = doc.output('blob');
             const pdfUrl = URL.createObjectURL(pdfOutput);
 
-            // Display success message and link to download the receipt
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('receiptLink').href = pdfUrl;
+            // Create a link element and trigger the download
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = 'receipt.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
-            // Optionally, submit the form if needed
-            // document.getElementById('leadForm').submit();
+            // Submit the form
+            document.getElementById('leadForm').target = 'hiddenFrame';
+            document.getElementById('leadForm').submit();
+
+            // Display success message
+            document.getElementById('successMessage').style.display = 'block';
         }
     </script>
 </body>
