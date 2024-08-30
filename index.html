@@ -1,142 +1,170 @@
 <style>
-  /* Form container styling */
-form {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+  /* Mobile-friendly form container styling */
+  form {
+      width: 90%;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
 
-/* Styling for form labels */
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-}
+  /* Styling for form labels */
+  label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+  }
 
-/* Styling for form input fields */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
+  /* Styling for form input fields */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+  }
 
-/* Styling for the submit button */
-button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-}
+  /* Styling for the submit button */
+  button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+  }
 
-/* Change button color on hover */
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
+  /* Change button color on hover */
+  button[type="submit"]:hover {
+      background-color: #45a049;
+  }
 
-/* Additional styling for a more refined look */
-input:focus,
-select:focus {
-    border-color: #4CAF50;
-    outline: none;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-}
+  /* Additional styling for a more refined look */
+  input:focus,
+  select:focus {
+      border-color: #4CAF50;
+      outline: none;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+
+  /* Ensure the form elements look good on smaller screens */
+  @media (max-width: 600px) {
+      form {
+          width: 100%;
+          padding: 15px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select {
+          padding: 10px;
+          font-size: 14px;
+      }
+
+      button[type="submit"] {
+          padding: 10px;
+          font-size: 14px;
+      }
+  }
 </style>
-
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
 
 <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST">
 
-<input type=hidden name="oid" value="00DWU000007yvAg">
-<input type=hidden name="retURL" value="https://neluheni.github.io/VhoMadevha/">
+  <input type="hidden" name="oid" value="00DWU000007yvAg">
+  <input type="hidden" name="retURL" value="https://neluheni.github.io/VhoMadevha/">
 
-<label for="first_name">First Name</label>
-<input id="first_name" maxlength="40" name="first_name" size="20" type="text" required />
+  <label for="first_name">First Name</label>
+  <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required />
 
-<label for="last_name">Last Name</label>
-<input id="last_name" maxlength="80" name="last_name" size="20" type="text" required />
+  <label for="last_name">Last Name</label>
+  <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required />
 
-<label for="email">Email</label>
-<input id="email" maxlength="80" name="email" size="20" type="email" required />
+  <label for="email">Email</label>
+  <input id="email" maxlength="80" name="email" size="20" type="email" required />
 
-<label for="company">Company</label>
-<input id="company" maxlength="40" name="company" size="20" type="text" required />
+  <label for="company">Company</label>
+  <input id="company" maxlength="40" name="company" size="20" type="text" required />
 
-<label for="province">State/Province</label>
-<select id="province" name="state" required>
-    <option value="">Select Province</option>
-    <option value="Gauteng">Gauteng</option>
-    <option value="Western Cape">Western Cape</option>
-    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-    <!-- Add more provinces as needed -->
-</select>
+  <label for="province">State/Province</label>
+  <select id="province" name="state" required>
+      <option value="">Select Province</option>
+      <option value="Eastern Cape">Eastern Cape</option>
+      <option value="Free State">Free State</option>
+      <option value="Gauteng">Gauteng</option>
+      <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+      <option value="Limpopo">Limpopo</option>
+      <option value="Mpumalanga">Mpumalanga</option>
+      <option value="Northern Cape">Northern Cape</option>
+      <option value="North West">North West</option>
+      <option value="Western Cape">Western Cape</option>
+  </select>
 
-<label for="city">City</label>
-<select id="city" name="city" required>
-    <option value="">Select City</option>
-    <!-- Cities will be populated based on selected province -->
-</select>
+  <label for="city">City</label>
+  <select id="city" name="city" required>
+      <option value="">Select City</option>
+  </select>
 
-<button type="submit">Submit</button>
+  <button type="submit">Submit</button>
 
-<div id="successMessage" style="display:none; margin-top: 20px; color: green;">
-    Form submitted successfully!
-</div>
+  <div id="successMessage" style="display:none; margin-top: 20px; color: green;">
+      Form submitted successfully!
+  </div>
 
 </form>
 
 <script>
-document.getElementById('province').addEventListener('change', function() {
-    var province = this.value;
-    var citySelect = document.getElementById('city');
+  document.getElementById('province').addEventListener('change', function() {
+      var province = this.value;
+      var citySelect = document.getElementById('city');
 
-    // Clear previous cities
-    citySelect.innerHTML = '<option value="">Select City</option>';
+      // Clear previous cities
+      citySelect.innerHTML = '<option value="">Select City</option>';
 
-    // Define city options based on the selected province
-    var cities = {
-        'Gauteng': ['Johannesburg', 'Pretoria', 'Soweto'],
-        'Western Cape': ['Cape Town', 'Stellenbosch', 'Paarl'],
-        'KwaZulu-Natal': ['Durban', 'Pietermaritzburg', 'Umhlanga']
-        // Add more provinces and their cities here
-    };
+      // Define city options based on the selected province
+      var cities = {
+          'Eastern Cape': ['Bhisho', 'East London', 'Port Elizabeth'],
+          'Free State': ['Bloemfontein', 'Welkom', 'Parys'],
+          'Gauteng': ['Johannesburg', 'Pretoria', 'Soweto'],
+          'KwaZulu-Natal': ['Durban', 'Pietermaritzburg', 'Richards Bay'],
+          'Limpopo': ['Polokwane', 'Thohoyandou', 'Tzaneen'],
+          'Mpumalanga': ['Nelspruit', 'Witbank', 'Secunda'],
+          'Northern Cape': ['Kimberley', 'Upington', 'Springbok'],
+          'North West': ['Mahikeng', 'Rustenburg', 'Klerksdorp'],
+          'Western Cape': ['Cape Town', 'Stellenbosch', 'George']
+      };
 
-    // Populate cities based on the selected province
-    if (province && cities[province]) {
-        cities[province].forEach(function(city) {
-            var option = document.createElement('option');
-            option.value = city;
-            option.textContent = city;
-            citySelect.appendChild(option);
-        });
-    }
-});
+      // Populate cities based on the selected province
+      if (province && cities[province]) {
+          cities[province].forEach(function(city) {
+              var option = document.createElement('option');
+              option.value = city;
+              option.textContent = city;
+              citySelect.appendChild(option);
+          });
+      }
+  });
 
-// Form submission success message
-document.getElementById('leadForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-    
-    // Simulate form submission success
-    setTimeout(function() {
-        document.getElementById('successMessage').style.display = 'block';
-    }, 500);
-    
-    // Optionally, you can add logic here to actually submit the form if needed
-    // this.submit(); // Uncomment this line if you want to proceed with the actual submission
-});
+  // Form submission success message
+  document.getElementById('leadForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      
+      // Simulate form submission success
+      setTimeout(function() {
+          document.getElementById('successMessage').style.display = 'block';
+      }, 500);
+      
+      // Optionally, you can add logic here to actually submit the form if needed
+      // this.submit(); // Uncomment this line if you want to proceed with the actual submission
+  });
 </script>
