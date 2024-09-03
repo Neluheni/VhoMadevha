@@ -1,51 +1,41 @@
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
-<!--  If necessary, please modify the charset parameter to specify the        -->
-<!--  character set of your HTML page.                                        -->
-<!--  ----------------------------------------------------------------------  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Power BI Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+        .report-container {
+            width: 80%;
+            height: 80%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <FORM> element to your page.             -->
-<!--  ----------------------------------------------------------------------  -->
-
-<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DWU000007yvAg" method="POST">
-
-<input type=hidden name="orgid" value="00DWU000007yvAg">
-<input type=hidden name="retURL" value="https://neluheni.github.io/VhoMadevha/">
-
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-<!--  these lines if you wish to test in debug mode.                          -->
-<!--  <input type="hidden" name="debug" value=1>                              -->
-<!--  <input type="hidden" name="debugEmail"                                  -->
-<!--  value="neluhenimr4jobs@gmail.com">                                      -->
-<!--  ----------------------------------------------------------------------  -->
-
-payment method:<select  id="00NWU0000039vlK" name="00NWU0000039vlK" title="payment method"><option value="">--None--</option><option value="cards">cards</option>
-<option value="cash">cash</option>
-</select><br>
-
-Product:<select  id="00NWU0000039AWQ" name="00NWU0000039AWQ" title="Product"><option value="">--None--</option><option value="GC1040">GC1040</option>
-<option value="GC1060">GC1060</option>
-<option value="GC3020">GC3020</option>
-<option value="GC3040">GC3040</option>
-<option value="GC3060">GC3060</option>
-<option value="GC5020">GC5020</option>
-<option value="GC5040">GC5040</option>
-<option value="GC5060">GC5060</option>
-<option value="GC1020">GC1020</option>
-</select><br>
-
-total pay:<input  id="00NWU0000039xIT" name="00NWU0000039xIT" size="20" type="text" /><br>
-
-<label for="status">Status</label><select  id="status" name="status"><option value="">--None--</option><option value="New">New</option>
-<option value="Working">Working</option>
-<option value="Escalated">Escalated</option>
-<option value="Closed">Closed</option>
-</select><br>
-
-<input type="submit" name="submit">
-
-</form>
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <iframe 
+            src="https://app.powerbi.com/reportEmbed?reportId=YOUR_REPORT_ID&autoAuth=true&ctid=49beb26c-5ac3-45ea-92f9-90b1f238c99f&pbi_source=linkShare" 
+            allowFullScreen="true"></iframe>
+    </div>
+</body>
+</html>
